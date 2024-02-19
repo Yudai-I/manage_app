@@ -1,4 +1,7 @@
 class AttendancesController < ApplicationController
+    def attendance
+    end
+
     def start_time
     end
 
