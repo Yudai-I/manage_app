@@ -73,3 +73,5 @@ end
 
 gem 'devise'
 gem 'webpacker', '~> 5.0'
+gem "jsbundling-rails"
+gem "cssbundling-rails"
