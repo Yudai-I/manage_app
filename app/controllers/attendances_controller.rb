@@ -1,6 +1,8 @@
 require 'date'
 class AttendancesController < ApplicationController
     def attendance
+      @year = params[:year].to_i
+      @month = params[:month].to_i
       start_date = Time.new(2024, 2, 1).beginning_of_month
       end_date = Time.new(2024, 2, 1).end_of_month
       @dates_in_february_2024 = (start_date.to_date..end_date.to_date).map do |date|
