@@ -31,6 +31,12 @@
         <% end %>
       </li>
       <li>
+        <%= link_to user_attendance_path(current_user.id), class: 'nav-link text-white' do %>
+        <i class="fa-regular fa-calendar"></i>
+        <span>勤怠情報</span>
+        <% end %>
+      </li>
+      <li>
         <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-white' do %>
         <i class="fas fa-sign-out-alt"></i> ログアウト
         <% end %>
