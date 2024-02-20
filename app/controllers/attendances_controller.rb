@@ -21,13 +21,13 @@ class AttendancesController < ApplicationController
 
     def formatting_week(week)
       weeks = {
-        :Sunday => "日曜日",
-        :Monday => "月曜日",
-        :Tuesday => "火曜日",
-        :Wednesday => "水曜日",
-        :Thursday => "木曜日",
-        :Friday => "金曜日",
-        :Saturday => "土曜日"
+        :Sunday => "日",
+        :Monday => "月",
+        :Tuesday => "火",
+        :Wednesday => "水",
+        :Thursday => "木",
+        :Friday => "金",
+        :Saturday => "土"
       }
       return weeks[week.to_sym]
     end
