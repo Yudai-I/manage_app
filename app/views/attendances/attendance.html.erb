@@ -1,0 +1,15 @@
+<table>
+<thead>
+<th>日付</th>
+<th>勤怠情報</th>
+</thead>
+<tbody>
+<tr>
+<% @dates_in_february_2024.each do |date_info| %>
+<td><%= "#{date_info[:date]} (#{date_info[:day_of_week]})" %></td>
+<% end %>
+</tr>
+</tbody>
+</table>
+
+
