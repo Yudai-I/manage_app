@@ -31,6 +31,11 @@
         <span>管理</span>
         <% end %>
       </li>
+      <li>
+        <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-white' do %>
+        <i class="fas fa-sign-out-alt"></i> ログアウト
+        <% end %>
+      </li>
       <% else %>
       <li>
         <%= link_to user_path(current_user.id), class: 'nav-link text-white' do %>
