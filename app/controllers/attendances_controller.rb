@@ -12,7 +12,7 @@ class AttendancesController < ApplicationController
       end_date = Time.new(year, month, 1).end_of_month
 
       @dates_in_february_2024 = (start_date.to_date..end_date.to_date).map do |date|
-        attendance = Attendance.find_by(start_time: date.beginning_of_day..date.end_of_day)
+        attendance = Attendance.find_by(start_time: date.beginning_of_day..date.end_of_day, user_id: current_user.id)
         if attendance and attendance.start_time != nil and attendance.end_time != nil
           start_time = attendance.start_time.strftime("%H:%M")
           end_time = attendance.end_time.strftime("%H:%M")
