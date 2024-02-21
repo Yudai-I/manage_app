@@ -1,6 +1,6 @@
 <%= form_with url: user_attendance_path(current_user.id), local: true, method: :get do |f| %>
-<%= f.select :year, (Date.current.year - 5..Date.current.year + 1) %><span>年</span>
-<%= f.select :month, (1..12) %><span>月の情報を</span>
+<%= f.select :year, (Date.current.year - 5..Date.current.year + 1), { selected: @year } %><span>年</span>
+<%= f.select :month, (1..12), { selected: @month } %><span>月の情報を</span>
 <%= f.submit '表示', class: "btn btn-primary" %>
 <% end %>
 

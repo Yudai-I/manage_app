@@ -3,6 +3,8 @@ class AttendancesController < ApplicationController
     def attendance
       year = params[:year].to_i
       month = params[:month].to_i
+      @year = params[:year].to_i
+      @month = params[:month].to_i
       if year == 0 and month == 0
         year = Date.current.year
         month = Date.current.month

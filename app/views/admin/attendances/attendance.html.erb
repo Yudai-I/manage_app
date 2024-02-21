@@ -1,0 +1,26 @@
+<%= form_with url: admin_attendance_path, local: true, method: :get do |f| %>
+<%= f.collection_select :user_id, @users, :id, :name, { selected: @user_id } %>
+<%= f.select :year, (Date.current.year - 5..Date.current.year + 1), { selected: @year } %><span>年</span>
+<%= f.select :month, (1..12), { selected: @month } %><span>月の情報を</span>
+<%= f.submit '表示', class: "btn btn-primary" %>
+<% end %>
+
+<table class="table table-Hoverable">
+<thead>
+<tr>
+<th>日付</th>
+<th>シフト時間</th>
+<th>勤怠情報</th>
+</tr>
+</thead>
+<tbody>
+<% @dates_in_february_2024.each do |date_info| %>
+<tr>
+<td><%= "#{date_info[:date]} (#{date_info[:day_of_week]})" %></td>
+<td><%= "#{date_info[:start_time]}～#{date_info[:end_time]}" %>
+</tr>
+<% end %>
+</tbody>
+</table>
+
+
