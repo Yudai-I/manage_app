@@ -1,10 +1,11 @@
+<%= @user_id %>
 <%= form_with url: admin_attendance_path, local: true, method: :get do |f| %>
 <%= f.collection_select :user_id, @users, :id, :name, { selected: @user_id } %>
 <%= f.select :year, (Date.current.year - 5..Date.current.year + 1), { selected: @year } %><span>年</span>
 <%= f.select :month, (1..12), { selected: @month } %><span>月の情報を</span>
 <%= f.submit '表示', class: "btn btn-primary" %>
 <% end %>
-
+<%= flash[:notice] %>
 <table class="table table-Hoverable">
 <thead>
 <tr>
@@ -14,15 +15,16 @@
 </tr>
 </thead>
 <tbody>
-<% @dates_in_february_2024.each do |date_info| %>
+<% @get_attendance_info.each do |date_info| %>
 <tr>
 <td><%= "#{date_info[:date]} (#{date_info[:day_of_week]})" %></td>
 <td>
-<%= form_with url: admin_attendance_path, local: true, method: :get do |f| %>
+<%= form_with model: @shift, url: admin_new_shift_path, local: true, method: :post do |f| %>
 <%= f.select :start_time_hour, (0..23).map { |h| [format('%02d', h), h] } %>
 <%= f.select :start_time_minute, (0..1).map { |m| ["#{format('%02d', m * 30)}", m * 30] } %><span>～</span>
 <%= f.select :end_time_hour, (0..23).map { |h| [format('%02d', h), h] } %>
 <%= f.select :end_time_minute, (0..1).map { |m| ["#{format('%02d', m * 30)}", m * 30] } %>
+<%= f.hidden_field :user_id, value: @user_id %>
 <%= f.submit '確定', class: "btn btn-primary" %>
 <% end %>
 </td>
