@@ -17,6 +17,15 @@
 <% @dates_in_february_2024.each do |date_info| %>
 <tr>
 <td><%= "#{date_info[:date]} (#{date_info[:day_of_week]})" %></td>
+<td>
+<%= form_with url: admin_attendance_path, local: true, method: :get do |f| %>
+<%= f.select :start_time_hour, (0..23).map { |h| [format('%02d', h), h] } %>
+<%= f.select :start_time_minute, (0..1).map { |m| ["#{format('%02d', m * 30)}", m * 30] } %><span>～</span>
+<%= f.select :end_time_hour, (0..23).map { |h| [format('%02d', h), h] } %>
+<%= f.select :end_time_minute, (0..1).map { |m| ["#{format('%02d', m * 30)}", m * 30] } %>
+<%= f.submit '確定', class: "btn btn-primary" %>
+<% end %>
+</td>
 <td><%= "#{date_info[:start_time]}～#{date_info[:end_time]}" %>
 </tr>
 <% end %>
