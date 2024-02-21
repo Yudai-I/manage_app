@@ -1,4 +1,4 @@
-<%= form_with url: user_attendance_path(current_user.id), local: true, methiod: :get do |f| %>
+<%= form_with url: user_attendance_path(current_user.id), local: true, method: :get do |f| %>
 <%= f.select :year, (Date.current.year - 5..Date.current.year + 1) %>
 <%= f.select :month, (1..12) %>
 <%= f.submit '確定' %>
