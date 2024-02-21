@@ -14,6 +14,9 @@ class AttendancesController < ApplicationController
       end
     end
 
+    def work
+    end
+
     def start_time
     end
 
