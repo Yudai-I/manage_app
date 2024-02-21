@@ -1,13 +1,14 @@
 <%= form_with url: user_attendance_path(current_user.id), local: true, method: :get do |f| %>
-<%= f.select :year, (Date.current.year - 5..Date.current.year + 1) %>
-<%= f.select :month, (1..12) %>
-<%= f.submit '確定' %>
+<%= f.select :year, (Date.current.year - 5..Date.current.year + 1) %><span>年</span>
+<%= f.select :month, (1..12) %><span>月の情報を</span>
+<%= f.submit '表示', class: "btn btn-primary" %>
 <% end %>
 
 <table class="table table-Hoverable">
 <thead>
 <tr>
 <th>日付</th>
+<th>シフト時間</th>
 <th>勤怠情報</th>
 </tr>
 </thead>
