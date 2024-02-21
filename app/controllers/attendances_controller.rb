@@ -5,28 +5,7 @@ class AttendancesController < ApplicationController
       month = params[:month].to_i
       @year = params[:year].to_i
       @month = params[:month].to_i
-      if year == 0 and month == 0
-        year = Date.current.year
-        month = Date.current.month
-      end
-
-      start_date = Time.new(year, month, 1).beginning_of_month
-      end_date = Time.new(year, month, 1).end_of_month
-
-      @dates_in_february_2024 = (start_date.to_date..end_date.to_date).map do |date|
-        attendance = Attendance.find_by(start_time: date.beginning_of_day..date.end_of_day, user_id: current_user.id)
-        if attendance and attendance.start_time != nil and attendance.end_time != nil
-          start_time = attendance.start_time.strftime("%H:%M")
-          end_time = attendance.end_time.strftime("%H:%M")
-        elsif attendance and attendance.end_time == nil
-          start_time = attendance.start_time.strftime("%H:%M")
-          end_time = nil
-        else
-          start_time = nil
-          end_time = nil
-        end
-        { date: date, day_of_week: formatting_week(date.strftime("%A")), start_time: start_time, end_time: end_time }
-      end
+      @get_attendance_info = get_attendance_info(year, month)
     end
 
     def work
@@ -74,5 +53,29 @@ class AttendancesController < ApplicationController
         :Saturday => "土"
       }
       return weeks[week.to_sym]
+    end
+
+    def get_attendance_info(year, month)
+      if year == 0 and month == 0
+          year = Date.current.year
+          month = Date.current.month
+      end
+      start_date = Time.new(year, month, 1).beginning_of_month
+      end_date = Time.new(year, month, 1).end_of_month
+      get_attendance_info = (start_date.to_date..end_date.to_date).map do |date|
+        attendance = Attendance.find_by(start_time: date.beginning_of_day..date.end_of_day, user_id: current_user.id)
+        if attendance and attendance.start_time != nil and attendance.end_time != nil
+          start_time = attendance.start_time.strftime("%H:%M")
+          end_time = attendance.end_time.strftime("%H:%M")
+        elsif attendance and attendance.end_time == nil
+          start_time = attendance.start_time.strftime("%H:%M")
+          end_time = nil
+        else
+          start_time = nil
+          end_time = nil
+        end
+        { date: date, day_of_week: formatting_week(date.strftime("%A")), start_time: start_time, end_time: end_time }
+      end
+      return get_attendance_info
     end
 end
