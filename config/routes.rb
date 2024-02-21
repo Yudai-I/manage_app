@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   resources :users, only: [:show] do
     get 'attendance' => 'attendances#attendance'
-    get 'work' => 'attendance#work'
-    post 'start_time' => 'attendances#start_time'
-    post 'end_time' => 'attendances#end_time'
+    get 'work' => 'attendances#work'
+    post 'start_work' => 'attendances#start_work'
+    post 'end_work' => 'attendances#end_work'
   end
 end

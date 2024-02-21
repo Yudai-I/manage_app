@@ -1,0 +1,9 @@
+<% if @status == true %>
+<%= form_with url: user_end_work_path(current_user.id), local: true, method: :post do |f| %>
+<%= f.submit '退勤' %>
+<% end %>
+<% else %>
+<%= form_with url: user_start_work_path(current_user.id), local: true, method: :post do |f| %>
+<%= f.submit '出勤' %>
+<% end %>
+<% end %>

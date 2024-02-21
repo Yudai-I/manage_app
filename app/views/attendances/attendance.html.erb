@@ -4,7 +4,7 @@
 <%= f.submit '確定' %>
 <% end %>
 
-<table>
+<table class="table table-Hoverable">
 <thead>
 <tr>
 <th>日付</th>
@@ -15,6 +15,7 @@
 <% @dates_in_february_2024.each do |date_info| %>
 <tr>
 <td><%= "#{date_info[:date]} (#{date_info[:day_of_week]})" %></td>
+<td><%= "#{date_info[:start_time]}～#{date_info[:end_time]}" %>
 </tr>
 <% end %>
 </tbody>

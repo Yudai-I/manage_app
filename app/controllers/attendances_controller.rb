@@ -7,20 +7,53 @@ class AttendancesController < ApplicationController
         year = Date.current.year
         month = Date.current.month
       end
+
       start_date = Time.new(year, month, 1).beginning_of_month
       end_date = Time.new(year, month, 1).end_of_month
+
       @dates_in_february_2024 = (start_date.to_date..end_date.to_date).map do |date|
-        { date: date, day_of_week: formatting_week(date.strftime("%A")) }
+        attendance = Attendance.find_by(start_time: date.beginning_of_day..date.end_of_day)
+        if attendance and attendance.start_time != nil and attendance.end_time != nil
+          start_time = attendance.start_time.strftime("%H:%M")
+          end_time = attendance.end_time.strftime("%H:%M")
+        elsif attendance and attendance.end_time == nil
+          start_time = attendance.start_time.strftime("%H:%M")
+          end_time = nil
+        else
+          start_time = nil
+          end_time = nil
+        end
+        { date: date, day_of_week: formatting_week(date.strftime("%A")), start_time: start_time, end_time: end_time }
       end
     end
 
     def work
+      attendance = current_user.attendances.last
+      if attendance
+        @status = attendance.status
+      else
+        @status = false
+      end
     end
 
-    def start_time
+    def start_work
+      @attendance = Attendance.new(user_id: current_user.id, start_time: Time.zone.now, status: true)
+      if @attendance.save
+        flash[:success] = "出勤しました。"
+      else
+        flash[:error] = "出勤できませんでした。"
+      end
+      redirect_to user_work_path(current_user.id)
     end
-
-    def end_time
+    
+    def end_work
+      @attendance = current_user.attendances.last
+      if @attendance.update(end_time: Time.zone.now, status: false)
+        flash[:success] = "退勤しました。"
+      else
+        flash[:error] = "退勤できませんでした。"
+      end
+      redirect_to user_work_path(current_user.id)
     end
 
     private
