@@ -1,9 +1,33 @@
-<% if @status == true %>
-<%= form_with url: user_end_work_path(current_user.id), local: true, method: :post do |f| %>
-<%= f.submit '退勤' %>
-<% end %>
-<% else %>
-<%= form_with url: user_start_work_path(current_user.id), local: true, method: :post do |f| %>
-<%= f.submit '出勤' %>
-<% end %>
-<% end %>
+<div class="container text-center py-5">
+  <div id="current-time" class="display-1 mb-4"></div>
+
+  <% if @status == true %>
+    <%= form_with url: user_end_work_path(current_user.id), local: true, method: :post do |f| %>
+      <%= f.submit '退勤', class: "btn btn-info btn-lg" %>
+    <% end %>
+  <% else %>
+    <%= form_with url: user_start_work_path(current_user.id), local: true, method: :post do |f| %>
+      <%= f.submit '出勤', class: "btn btn-success btn-lg" %>
+    <% end %>
+  <% end %>
+</div>
+
+<script>
+  function displayCurrentTime() {
+    var currentTimeElement = document.getElementById('current-time');
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+    var seconds = now.getSeconds();
+
+    hours = String(hours).padStart(2, '0');
+    minutes = String(minutes).padStart(2, '0');
+    seconds = String(seconds).padStart(2, '0');
+
+    currentTimeElement.textContent = hours + ':' + minutes + ':' + seconds;
+  }
+
+  displayCurrentTime();
+
+  setInterval(displayCurrentTime, 1000);
+</script>
