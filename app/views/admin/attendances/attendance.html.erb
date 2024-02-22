@@ -15,9 +15,9 @@
 </tr>
 </thead>
 <tbody>
-<% @get_attendance_info.each do |date_info| %>
+<% @get_attendance_info.each do |attendance| %>
 <tr>
-<td><%= "#{date_info[:date]} (#{date_info[:day_of_week]})" %></td>
+<td><%= "#{attendance[:date]} (#{attendance[:day_of_week]})" %></td>
 <td>
 <%= form_with model: @shift, url: admin_new_shift_path, local: true, method: :post do |f| %>
 <%= f.select :start_time_hour, (0..23).map { |h| [format('%02d', h), h] } %>
@@ -27,11 +27,11 @@
 <%= f.hidden_field :user_id, value: @user_id %>
 <%= f.hidden_field :year, value: @year %>
 <%= f.hidden_field :month, value: @month %>
-<%= f.hidden_field :day, value: date_info[:date].day %>
+<%= f.hidden_field :day, value: attendance[:date].day %>
 <%= f.submit '確定', class: "btn btn-primary" %>
 <% end %>
 </td>
-<td><%= "#{date_info[:start_time]}～#{date_info[:end_time]}" %>
+<td><%= "#{attendance[:start_time]}～#{attendance[:end_time]}" %>
 </tr>
 <% end %>
 </tbody>
