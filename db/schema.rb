@@ -34,13 +34,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_21_104041) do
 
   create_table "shifts", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "year"
-    t.integer "month"
-    t.integer "day"
-    t.integer "start_time_hour"
-    t.integer "start_time_minute"
-    t.integer "end_time_hour"
-    t.integer "end_time_minute"
+    t.integer "year", null: false
+    t.integer "month", null: false
+    t.integer "day", null: false
+    t.integer "start_time_hour", null: false
+    t.integer "start_time_minute", null: false
+    t.integer "end_time_hour", null: false
+    t.integer "end_time_minute", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
