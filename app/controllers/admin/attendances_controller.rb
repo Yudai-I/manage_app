@@ -14,7 +14,7 @@ class Admin::AttendancesController < ApplicationController
     user_id = params[:shift][:user_id]
     @shift = Shift.new(shift_params)
     @shift.user_id = user_id
-    if @shift.save!
+    if @shift.save
         @shift = Shift.new
         @users = User.all
         @user_id = user_id

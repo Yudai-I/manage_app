@@ -25,6 +25,9 @@
 <%= f.select :end_time_hour, (0..23).map { |h| [format('%02d', h), h] } %>
 <%= f.select :end_time_minute, (0..1).map { |m| ["#{format('%02d', m * 30)}", m * 30] } %>
 <%= f.hidden_field :user_id, value: @user_id %>
+<%= f.hidden_field :year, value: @year %>
+<%= f.hidden_field :month, value: @month %>
+<%= f.hidden_field :day, value: date_info[:date].day %>
 <%= f.submit '確定', class: "btn btn-primary" %>
 <% end %>
 </td>
