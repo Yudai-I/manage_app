@@ -1,3 +1,4 @@
+<%= flash[:error] %>
 <%= form_with url: user_attendance_path(current_user.id), local: true, method: :get do |f| %>
 <%= f.select :year, (Date.current.year - 5..Date.current.year + 1), { selected: @year } %><span>年</span>
 <%= f.select :month, (1..12), { selected: @month } %><span>月の情報を</span>
@@ -8,6 +9,7 @@
 <thead>
 <tr>
 <th>日付</th>
+<th>やること</th>
 <th>シフト時間</th>
 <th>勤怠情報</th>
 </tr>
@@ -16,6 +18,7 @@
 <% @get_attendance_info.zip(@get_shift_info) do |attendance, shift| %>
 <tr>
 <td><%= "#{attendance[:date]} (#{attendance[:day_of_week]})" %></td>
+<td><%= render 'todo', todo: @todo, date: attendance[:date] %></td>
 <td><%= "#{shift[:start_time]}～#{shift[:end_time]}" %>
 <td><%= "#{attendance[:start_time]}～#{attendance[:end_time]}" %></td>
 </tr>

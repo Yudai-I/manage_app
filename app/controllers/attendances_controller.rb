@@ -1,6 +1,7 @@
 require 'date'
 class AttendancesController < ApplicationController
     def attendance
+      @todo = Todo.new
       year = params[:year].to_i
       month = params[:month].to_i
       @year = params[:year].to_i
@@ -38,9 +39,24 @@ class AttendancesController < ApplicationController
       redirect_to user_work_path(current_user.id)
     end
 
+    def create_todo
+      todo = Todo.new(todo_params)
+      if todo.save
+        flash[:notice] = 'タスクの作成に成功しました'
+        redirect_to user_attendance_path(current_user.id)
+      else
+        flash[:notice] = 'タスクの作成に失敗しました'
+        redirect_to user_attendance_path(current_user.id)
+      end
+    end
+
     private
     def time_params
       params.require(:attendance).permit(:start_time, :end_time, :status)
+    end
+
+    def todo_params
+      params.require(:todo).permit(:user_id, :task, :is_completed, :date)
     end
 
     def formatting_week(week)

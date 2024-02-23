@@ -1,0 +1,6 @@
+<%= form_with model: todo, url: user_create_todo_path, local: true do |f| %>
+<%= f.hidden_field :user_id, value: current_user.id %>
+<%= f.text_field :task %>
+<%= f.hidden_field :date, value: date %>
+<%= f.submit '作成' %>
+<% end %>

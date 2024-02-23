@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     get 'work' => 'attendances#work'
     post 'start_work' => 'attendances#start_work'
     post 'end_work' => 'attendances#end_work'
+    post 'create_todo' => 'attendances#create_todo'
   end
 
   namespace :admin do
