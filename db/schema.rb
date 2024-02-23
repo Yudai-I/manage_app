@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_21_104041) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_23_035106) do
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -41,6 +41,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_21_104041) do
     t.integer "start_time_minute", null: false
     t.integer "end_time_hour", null: false
     t.integer "end_time_minute", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "todos", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.text "task", null: false
+    t.date "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
