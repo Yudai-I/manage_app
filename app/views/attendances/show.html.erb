@@ -1,12 +1,11 @@
 <%= turbo_frame_tag "todos-#{@date}-#{@user_id}" do %>
-<%= link_to "閉じる", user_attendance_path(@user_id) %></br>
+<%= link_to "閉じる", user_attendance_path(@user_id), class: 'btn btn-danger' %></br>
 <% @todos.each do |todo| %>
 <%= todo.task %>
 <%= link_to '削除', user_destroy_todo_path(user_id: @user_id, id: todo.id), 
   data: {
     turbo_method: :delete,
-    turbo_confirm: "Are you sure?"
- } %>
+ }, class: 'text-decoration-none' %>
 </br>
 <% end %>
 <% end %>
