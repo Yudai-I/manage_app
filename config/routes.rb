@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     post 'start_work' => 'attendances#start_work'
     post 'end_work' => 'attendances#end_work'
     post 'create_todo' => 'attendances#create_todo'
+    patch 'todo/:id' => 'attendances#update_todo', as: 'update_todo'
     delete 'todo/:id' => 'attendances#destroy_todo', as: 'destroy_todo'
   end
 

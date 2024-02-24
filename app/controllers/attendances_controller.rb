@@ -16,9 +16,22 @@ class AttendancesController < ApplicationController
       @date = params[:date]
     end
 
+    def update_todo
+      todo = Todo.find(params[:id])
+      if todo.update(todo_params)
+        flash[:notice] = "タスクの編集に成功しました"
+        redirect_to user_attendance_path(current_user.id)
+      else
+        flash[:notice] = "タスクの編集に失敗しました"
+        redirect_to user_attendance_path(current_user.id)
+      end
+      
+    end
+
     def destroy_todo
       todo = Todo.find(params[:id])
       todo.destroy
+      flash[:notice] = "タスクの削除に成功しました"
       redirect_to user_attendance_path(current_user.id)
     end
 

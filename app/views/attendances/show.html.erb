@@ -1,11 +1,16 @@
 <%= turbo_frame_tag "todos-#{@date}-#{@user_id}" do %>
 <%= link_to "閉じる", user_attendance_path(@user_id), class: 'btn btn-danger' %></br>
 <% @todos.each do |todo| %>
-<%= todo.task %>
+<%= form_with model: todo, url: user_update_todo_path(user_id: @user_id, id: todo.id), method: :patch do |f| %>
+<%= f.text_field :task %>
+<%= f.submit '更新' %>
 <%= link_to '削除', user_destroy_todo_path(user_id: @user_id, id: todo.id), 
   data: {
     turbo_method: :delete,
- }, class: 'text-decoration-none' %>
+ }, class: 'btn btn-danger' %>
 </br>
+</br>
+<% end %>
+
 <% end %>
 <% end %>
