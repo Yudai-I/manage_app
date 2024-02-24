@@ -1,0 +1,6 @@
+<%= turbo_frame_tag "todos-#{@date}-#{@user_id}" do %>
+<%= link_to "閉じる", user_attendance_path(@user_id) %>
+<% @todos.each do |todo| %>
+<%= todo.task %>
+<% end %>
+<% end %>

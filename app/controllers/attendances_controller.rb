@@ -10,6 +10,12 @@ class AttendancesController < ApplicationController
       @get_shift_info = get_shift_info(year, month)
     end
 
+    def show
+      @todos = Todo.where(user_id: params[:user_id], date: params[:date])
+      @user_id = params[:user_id]
+      @date = params[:date]
+    end
+
     def work
       attendance = current_user.attendances.last
       if attendance
@@ -91,7 +97,8 @@ class AttendancesController < ApplicationController
           start_time = nil
           end_time = nil
         end
-        { date: date, day_of_week: formatting_week(date.strftime("%A")), start_time: start_time, end_time: end_time }
+        todos = Attendance.get_todo_info(date, current_user.id)
+        { date: date, day_of_week: formatting_week(date.strftime("%A")), start_time: start_time, end_time: end_time, todos: todos }
       end
       return get_attendance_info
     end
