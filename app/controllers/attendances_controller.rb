@@ -16,6 +16,13 @@ class AttendancesController < ApplicationController
       @date = params[:date]
     end
 
+    def destroy_todo
+      todo = Todo.find(params[:id])
+      todo.destroy
+      redirect_to user_attendance_path(current_user.id)
+    end
+
+
     def work
       attendance = current_user.attendances.last
       if attendance

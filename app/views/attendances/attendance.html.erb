@@ -17,11 +17,10 @@
 <tbody>
 <% @get_attendance_info.zip(@get_shift_info) do |attendance, shift| %>
 <tr>
-<td><%= attendance[:todos].count %></td>
 <td><%= "#{attendance[:date]} (#{attendance[:day_of_week]})" %></td>
 <td class="todo">
 <%= turbo_frame_tag "todos-#{attendance[:date]}-#{current_user.id}" do %>
-  <%= link_to '詳細', user_todo_path(date: attendance[:date], user_id: current_user.id) %>
+  <%= link_to '詳細', user_todo_path(user_id: current_user.id, date: attendance[:date]) %>
 <% end %>
 <%= render 'todo', todo: @todo, date: attendance[:date] %>
 </td>
