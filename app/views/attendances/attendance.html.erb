@@ -19,11 +19,14 @@
 <tr>
 <td><%= "#{attendance[:date]} (#{attendance[:day_of_week]})" %></td>
 <td class="todo">
-<span style="font-size: larger;">タスク残件数⇒<%= Attendance.count_task_is_completed_false(attendance[:todos]) %></span>
+
 <%= turbo_frame_tag "todos-#{attendance[:date]}-#{current_user.id}" do %>
   <%= link_to '詳細', user_todo_path(user_id: current_user.id, date: attendance[:date]), class: 'btn btn-info' %>
 <% end %>
 <%= render 'todo', todo: @todo, date: attendance[:date] %>
+<% if Attendance.count_task_is_completed_false(attendance[:todos]) >= 1 %>
+<span style="font-size: larger;">タスク残件数⇒<%= Attendance.count_task_is_completed_false(attendance[:todos]) %></span>
+<% end %>
 </td>
 <td><%= "#{shift[:start_time]}～#{shift[:end_time]}" %>
 <td><%= "#{attendance[:start_time]}～#{attendance[:end_time]}" %></td>

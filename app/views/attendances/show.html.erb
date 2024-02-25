@@ -2,7 +2,7 @@
 <%= link_to "閉じる", user_attendance_path(@user_id), class: 'btn btn-danger' %></br>
 <% @todos.each do |todo| %>
 <%= form_with model: todo, url: user_update_todo_path(user_id: @user_id, id: todo.id), method: :patch do |f| %>
-<%= f.check_box :is_completed, { checked: todo.is_completed }, true, false %>
+<%= f.check_box :is_completed, { checked: todo.is_completed } %>
 <%= f.text_field :task %>
 <%= f.submit '更新' %>
 <%= link_to '削除', user_destroy_todo_path(user_id: @user_id, id: todo.id), 
