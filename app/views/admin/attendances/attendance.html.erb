@@ -1,10 +1,15 @@
-<%= @user_id %>
+<div class="d-flex align-items-center justify-content-center">
 <%= form_with url: admin_attendance_path, local: true, method: :get do |f| %>
 <%= f.collection_select :user_id, @users, :id, :name, { selected: @user_id } %>
 <%= f.select :year, (Date.current.year - 5..Date.current.year + 1), { selected: @year } %><span>年</span>
 <%= f.select :month, (1..12), { selected: @month } %><span>月の情報を</span>
 <%= f.submit '表示', class: "btn btn-primary" %>
 <% end %>
+</div>
+<div class="d-flex align-items-center justify-content-center">
+<strong><%= @user_name %></strong>さんの情報を表示中
+</div>
+</div>
 <%= flash[:notice] %>
 <table class="table table-Hoverable">
 <thead>

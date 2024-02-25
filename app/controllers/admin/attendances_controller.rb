@@ -1,8 +1,9 @@
 class Admin::AttendancesController < ApplicationController
   def attendance
     @shift = Shift.new
-    @users = User.all
+    @users = User.where(admin: false)
     @user_id = params[:user_id]
+    @user_name = User.find(params[:user_id]).name
     year = params[:year].to_i
     month = params[:month].to_i
     @year = params[:year].to_i
