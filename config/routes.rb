@@ -13,6 +13,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get 'attendance' => 'attendances#attendance'
-    post 'new_shift' => 'attendances#new_shift'
+    post 'attendance' => 'attendances#new_shift'
   end
 end

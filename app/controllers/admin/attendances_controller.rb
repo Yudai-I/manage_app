@@ -19,12 +19,13 @@ class Admin::AttendancesController < ApplicationController
         @shift = Shift.new
         @users = User.all
         @user_id = user_id
+        @user_name = User.find(@user_id).name
         year = @shift.year.to_i
         month = @shift.month.to_i
         @year = @shift.year.to_i
         @month = @shift.month.to_i
         @get_attendance_info = get_attendance_info(year, month)
-        flash[:notice] = "シフト作成に成功しました"
+        flash.now[:notice] = "シフト作成に成功しました"
         render :attendance
     else
         flash[:notice] = "シフト作成に失敗しました"

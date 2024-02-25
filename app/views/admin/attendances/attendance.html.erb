@@ -6,7 +6,7 @@
 <%= f.submit '表示', class: "btn btn-primary" %>
 <% end %>
 </div>
-<% if params[:user_id] %>
+<% if @user_id %>
 <div class="d-flex align-items-center justify-content-center">
 <strong><%= @user_name %></strong>さんの情報を表示中
 </div>
@@ -25,7 +25,7 @@
 <tr>
 <td><%= "#{attendance[:date]} (#{attendance[:day_of_week]})" %></td>
 <td>
-<%= form_with model: @shift, url: admin_new_shift_path, local: true, method: :post do |f| %>
+<%= form_with model: @shift, url: admin_attendance_path, local: true, method: :post do |f| %>
 <%= f.select :start_time_hour, (0..23).map { |h| [format('%02d', h), h] } %>
 <%= f.select :start_time_minute, (0..1).map { |m| ["#{format('%02d', m * 30)}", m * 30] } %><span>～</span>
 <%= f.select :end_time_hour, (0..23).map { |h| [format('%02d', h), h] } %>
@@ -34,7 +34,7 @@
 <%= f.hidden_field :year, value: @year %>
 <%= f.hidden_field :month, value: @month %>
 <%= f.hidden_field :day, value: attendance[:date].day %>
-<%= f.submit '確定', class: "btn btn-primary" %>
+<%= f.submit '確定', class: "btn btn-primary", data: { turbo: false } %>
 <% end %>
 </td>
 <td><%= "#{attendance[:start_time]}～#{attendance[:end_time]}" %>
