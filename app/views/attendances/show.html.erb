@@ -4,7 +4,7 @@
 <%= form_with model: todo, url: user_update_todo_path(user_id: @user_id, id: todo.id), method: :patch do |f| %>
 <%= f.check_box :is_completed, { checked: todo.is_completed } %>
 <%= f.text_field :task %>
-<%= f.submit '更新' %>
+<%= f.submit '更新', data: { turbo: false } %>
 <%= link_to '削除', user_destroy_todo_path(user_id: @user_id, id: todo.id), 
   data: {
     turbo_method: :delete,

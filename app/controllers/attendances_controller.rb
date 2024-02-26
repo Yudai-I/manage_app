@@ -22,7 +22,7 @@ class AttendancesController < ApplicationController
         @get_attendance_info = get_attendance_info(@year, @month)
         @get_shift_info = get_shift_info(@year, @month)
         @todo = Todo.new
-        flash.now[:notice] = 'タスクの作成に成功しました'
+        flash.now[:notice] = 'タスクの更新に成功しました'
         render :attendance
       else
         @year = todo.date.year
@@ -30,7 +30,7 @@ class AttendancesController < ApplicationController
         @get_attendance_info = get_attendance_info(@year, @month)
         @get_shift_info = get_shift_info(@year, @month)
         @todo = Todo.new
-        flash.now[:notice] = 'タスクの作成に成功しました'
+        flash.now[:notice] = 'タスクの更新に失敗しました'
         render :attendance
       end
       
@@ -44,7 +44,6 @@ class AttendancesController < ApplicationController
       @get_attendance_info = get_attendance_info(@year, @month)
       @get_shift_info = get_shift_info(@year, @month)
       @todo = Todo.new
-      flash.now[:notice] = 'タスクの作成に成功しました'
       render :attendance
     end
 
