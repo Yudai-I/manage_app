@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   def show
+    @active_nav = :user_show
     start_date = 1.month.ago.beginning_of_month
     end_date = 1.month.ago.end_of_month
     

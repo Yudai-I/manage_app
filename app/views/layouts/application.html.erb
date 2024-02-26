@@ -31,7 +31,11 @@
       <li>
         <%= link_to admin_attendance_path, class: 'nav-link text-white' do %>
         <i class="fa-solid fa-gears"></i>
+        <% if @active_nav == :attendance %>
+        <span class="text-yellow">管理</span>
+      <% else %>
         <span>管理</span>
+      <% end %>
         <% end %>
       </li>
       <li>
@@ -43,19 +47,31 @@
       <li>
         <%= link_to user_path(current_user.id), class: 'nav-link text-white' do %>
         <i class="fas fa-home"></i>
+        <% if @active_nav == :user_show %>
+        <span class="text-yellow">マイページ</span>
+      <% else %>
         <span>マイページ</span>
+      <% end %>
         <% end %>
       </li>
       <li>
         <%= link_to user_attendance_path(current_user.id), class: 'nav-link text-white' do %>
         <i class="fa-solid fa-calendar-days"></i>
+        <% if @active_nav == :attendance %>
+        <span class="text-yellow">勤怠情報</span>
+      <% else %>
         <span>勤怠情報</span>
+      <% end %>
         <% end %>
       </li>
       <li>
         <%= link_to user_work_path(current_user.id), class: 'nav-link text-white' do %>
         <i class="fa-solid fa-id-badge"></i>
-        <span>勤怠</span>
+        <% if @active_nav == :work %>
+        <span class="text-yellow">勤怠情報</span>
+      <% else %>
+        <span>勤怠情報</span>
+      <% end %>
         <% end %>
       </li>
       <li>
@@ -67,7 +83,11 @@
     <% else %>
     <li>
         <%= link_to root_path, class: 'nav-link text-white' do %>
-        <i class="fa-solid fa-circle-info"></i> トップページ
+        <i class="fa-solid fa-circle-info"></i><% if @active_nav == :top %>
+        <span class="text-yellow">トップページ</span>
+      <% else %>
+        <span>トップページ</span>
+      <% end %>
         <% end %>
       </li>
       <li>

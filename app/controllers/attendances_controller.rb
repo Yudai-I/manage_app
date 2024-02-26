@@ -1,6 +1,7 @@
 require 'date'
 class AttendancesController < ApplicationController
     def attendance
+      @active_nav = :attendance
       @todo = Todo.new
       @year = params[:year].to_i
       @month = params[:month].to_i
@@ -15,6 +16,7 @@ class AttendancesController < ApplicationController
     end
 
     def update_todo
+      @active_nav = :attendance
       todo = Todo.find(params[:id])
       if todo.update(todo_params)
         @year = todo.date.year
@@ -37,6 +39,7 @@ class AttendancesController < ApplicationController
     end
 
     def destroy_todo
+      @active_nav = :attendance
       todo = Todo.find(params[:id])
       @year = todo.date.year
       @month = todo.date.month
@@ -49,6 +52,7 @@ class AttendancesController < ApplicationController
 
 
     def work
+      @active_nav = :work
       attendance = current_user.attendances.last
       if attendance
         @status = attendance.status
@@ -78,6 +82,7 @@ class AttendancesController < ApplicationController
     end
 
     def create_todo
+      @active_nav = :attendance
       todo = Todo.new(todo_params)
       if todo.save
         @year = todo.date.year

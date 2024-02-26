@@ -1,5 +1,6 @@
 class Admin::AttendancesController < ApplicationController
   def attendance
+    @active_nav = :attendance
     @shift = Shift.new
     @users = User.where(admin: false)
     @user_id = params[:user_id]
