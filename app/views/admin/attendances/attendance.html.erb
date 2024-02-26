@@ -12,6 +12,7 @@
 </div>
 <% end %>
 <%= flash[:notice] %>
+<% if @user_id %>
 <table class="table table-Hoverable">
 <thead>
 <tr>
@@ -42,5 +43,4 @@
 <% end %>
 </tbody>
 </table>
-
-
+<% end %>
