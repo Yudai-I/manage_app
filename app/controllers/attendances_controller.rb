@@ -38,9 +38,9 @@ class AttendancesController < ApplicationController
 
     def destroy_todo
       todo = Todo.find(params[:id])
-      todo.destroy
       @year = todo.date.year
       @month = todo.date.month
+      todo.destroy
       @get_attendance_info = get_attendance_info(@year, @month)
       @get_shift_info = get_shift_info(@year, @month)
       @todo = Todo.new
