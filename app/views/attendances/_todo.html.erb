@@ -1,6 +1,6 @@
-<%= form_with model: todo, url: user_create_todo_path, local: true do |f| %>
+<%= form_with model: todo, url: user_attendance_path, local: true do |f| %>
 <%= f.hidden_field :user_id, value: current_user.id %>
 <%= f.text_field :task, placeholder: "タスクを入力してください" %>
 <%= f.hidden_field :date, value: date %>
-<%= f.submit '作成', class: 'btn btn-primary' %>
+<%= f.submit '作成', class: 'btn btn-primary', data: { turbo: false } %>
 <% end %>

@@ -2,12 +2,10 @@ require 'date'
 class AttendancesController < ApplicationController
     def attendance
       @todo = Todo.new
-      year = params[:year].to_i
-      month = params[:month].to_i
       @year = params[:year].to_i
       @month = params[:month].to_i
-      @get_attendance_info = get_attendance_info(year, month)
-      @get_shift_info = get_shift_info(year, month)
+      @get_attendance_info = get_attendance_info(@year, @month)
+      @get_shift_info = get_shift_info(@year, @month)
     end
 
     def show
@@ -67,12 +65,17 @@ class AttendancesController < ApplicationController
 
     def create_todo
       todo = Todo.new(todo_params)
+      @year = params[:year].to_i
+      @month = params[:month].to_i
+      @get_attendance_info = get_attendance_info(@year, @month)
+      @get_shift_info = get_shift_info(@year, @month)
       if todo.save
-        flash[:notice] = 'タスクの作成に成功しました'
-        redirect_to user_attendance_path(current_user.id)
+        @todo = Todo.new
+        flash.now[:notice] = 'タスクの作成に成功しました'
+        render :attendance
       else
-        flash[:notice] = 'タスクの作成に失敗しました'
-        redirect_to user_attendance_path(current_user.id)
+        flash.now[:notice] = 'タスクの作成に失敗しました'
+        render :attendance
       end
     end
 
