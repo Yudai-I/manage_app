@@ -8,8 +8,8 @@
 # seeds.rb
 
 User.create!(name:  "管理者1",
-             email: "a@a",
-             password:  "aaaaaa",
-             password_confirmation: "aaaaaa",
+             email: "admin@admin",
+             password:  "admin555",
+             password_confirmation: "admin555",
              admin: true)
 
