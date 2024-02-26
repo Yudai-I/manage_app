@@ -4,12 +4,10 @@ class Admin::AttendancesController < ApplicationController
     @users = User.where(admin: false)
     @user_id = params[:user_id]
     @user_name = User.find(params[:user_id]).name if params[:user_id]
-    year = params[:year].to_i
-    month = params[:month].to_i
     @year = params[:year].to_i
     @month = params[:month].to_i
-    @get_attendance_info = get_attendance_info(year, month)
-    @get_shift_info = get_shift_info(year, month, @user_id)
+    @get_attendance_info = get_attendance_info(@year, @month)
+    @get_shift_info = get_shift_info(@year, @month, @user_id)
   end
 
   def new_shift
@@ -21,12 +19,10 @@ class Admin::AttendancesController < ApplicationController
         @users = User.all
         @user_id = user_id
         @user_name = User.find(@user_id).name
-        year = @shift.year.to_i
-        month = @shift.month.to_i
-        @year = @shift.year.to_i
-        @month = @shift.month.to_i
-        @get_attendance_info = get_attendance_info(year, month)
-        @get_shift_info = get_shift_info(year, month, @user_id)
+        @year = params[:shift][:year].to_i
+        @month = params[:shift][:month].to_i
+        @get_attendance_info = get_attendance_info(@year, @month)
+        @get_shift_info = get_shift_info(@year, @month, @user_id)
         flash.now[:notice] = "シフト作成に成功しました"
         render :attendance
     else

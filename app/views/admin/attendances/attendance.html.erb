@@ -1,3 +1,4 @@
+<%= @year %>
 <div class="d-flex align-items-center justify-content-center">
 <%= form_with url: admin_attendance_path, local: true, method: :get do |f| %>
 <%= f.collection_select :user_id, @users, :id, :name, { selected: @user_id } %>
