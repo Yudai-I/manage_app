@@ -17,11 +17,21 @@ class AttendancesController < ApplicationController
     def update_todo
       todo = Todo.find(params[:id])
       if todo.update(todo_params)
-        flash[:notice] = "タスクの編集に成功しました"
-        redirect_to user_attendance_path(current_user.id)
+        @year = todo.date.year
+        @month = todo.date.month
+        @get_attendance_info = get_attendance_info(@year, @month)
+        @get_shift_info = get_shift_info(@year, @month)
+        @todo = Todo.new
+        flash.now[:notice] = 'タスクの作成に成功しました'
+        render :attendance
       else
-        flash[:notice] = "タスクの編集に失敗しました"
-        redirect_to user_attendance_path(current_user.id)
+        @year = todo.date.year
+        @month = todo.date.month
+        @get_attendance_info = get_attendance_info(@year, @month)
+        @get_shift_info = get_shift_info(@year, @month)
+        @todo = Todo.new
+        flash.now[:notice] = 'タスクの作成に成功しました'
+        render :attendance
       end
       
     end
@@ -29,8 +39,13 @@ class AttendancesController < ApplicationController
     def destroy_todo
       todo = Todo.find(params[:id])
       todo.destroy
-      flash[:notice] = "タスクの削除に成功しました"
-      redirect_to user_attendance_path(current_user.id)
+      @year = todo.date.year
+      @month = todo.date.month
+      @get_attendance_info = get_attendance_info(@year, @month)
+      @get_shift_info = get_shift_info(@year, @month)
+      @todo = Todo.new
+      flash.now[:notice] = 'タスクの作成に成功しました'
+      render :attendance
     end
 
 
@@ -65,15 +80,20 @@ class AttendancesController < ApplicationController
 
     def create_todo
       todo = Todo.new(todo_params)
-      @year = params[:year].to_i
-      @month = params[:month].to_i
-      @get_attendance_info = get_attendance_info(@year, @month)
-      @get_shift_info = get_shift_info(@year, @month)
       if todo.save
+        @year = todo.date.year
+        @month = todo.date.month
+        @get_attendance_info = get_attendance_info(@year, @month)
+        @get_shift_info = get_shift_info(@year, @month)
         @todo = Todo.new
         flash.now[:notice] = 'タスクの作成に成功しました'
         render :attendance
       else
+        @year = todo.date.year
+        @month = todo.date.month
+        @get_attendance_info = get_attendance_info(@year, @month)
+        @get_shift_info = get_shift_info(@year, @month)
+        @todo = Todo.new
         flash.now[:notice] = 'タスクの作成に失敗しました'
         render :attendance
       end

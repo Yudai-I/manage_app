@@ -1,3 +1,4 @@
+
 <%= flash[:notice] %>
 <%= form_with url: user_attendance_path(current_user.id), local: true, method: :get do |f| %>
 <%= f.select :year, (Date.current.year - 5..Date.current.year + 1), { selected: @year } %><span>年</span>
