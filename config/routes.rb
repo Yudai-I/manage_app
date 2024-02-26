@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+  root to: 'homes#top'
   resources :users, only: [:show] do
     get 'attendance' => 'attendances#attendance'
     get 'work' => 'attendances#work'

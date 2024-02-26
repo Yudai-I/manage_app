@@ -6,6 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= turbo_include_tags %>
+    <script src="https://kit.fontawesome.com/a61de98c96.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "signup", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
@@ -29,7 +30,7 @@
       <% if current_user.admin? %>
       <li>
         <%= link_to admin_attendance_path, class: 'nav-link text-white' do %>
-        <i class="fas fa-home"></i>
+        <i class="fa-solid fa-gears"></i>
         <span>管理</span>
         <% end %>
       </li>
@@ -47,13 +48,13 @@
       </li>
       <li>
         <%= link_to user_attendance_path(current_user.id), class: 'nav-link text-white' do %>
-        <i class="fa-regular fa-calendar"></i>
+        <i class="fa-solid fa-calendar-days"></i>
         <span>勤怠情報</span>
         <% end %>
       </li>
       <li>
         <%= link_to user_work_path(current_user.id), class: 'nav-link text-white' do %>
-        <i class="fa-regular fa-calendar"></i>
+        <i class="fa-solid fa-id-badge"></i>
         <span>勤怠</span>
         <% end %>
       </li>
@@ -64,6 +65,11 @@
       </li>
       <% end %>
     <% else %>
+    <li>
+        <%= link_to root_path, class: 'nav-link text-white' do %>
+        <i class="fa-solid fa-circle-info"></i> トップページ
+        <% end %>
+      </li>
       <li>
         <%= link_to new_user_registration_path, class: 'nav-link text-white' do %>
         <i class="fas fa-user-plus"></i> 新規登録
